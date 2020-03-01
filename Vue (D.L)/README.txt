@@ -1,0 +1,1 @@
+https://coursehunter.net/course/intensivnyy-kurs-po-vue-js

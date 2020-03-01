@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+        <div class="sample">
+            <input type="text" v-model="firstName">
+            <hr>
+            <input type="text" v-model="lastName">
+
+            <hr>
+
+            <!-- <h2>Hello,{{ firstName + ' ' + lastName }}</h2> -->
+            <h2>Hello,{{ fullName }}</h2>
+
+            <hr>
+
+            <button class="btn btn-success" @click="showText = !showText">ToggleText</button>
+
+            <hr>
+
+            <div v-show="showText">Some text</div>
+
+
+        </div>
+    </div>
+
+
+    <script>
+        let sample = new Vue({
+            el: '.sample',
+            data: {
+                firstName: '',
+                lastName: '',
+                showText: false
+            },
+            computed: {
+                fullName() {
+                    console.log('render fullName');
+
+                    return this.firstName + ' ' + this.lastName;
+                }
+            }
+        });
+
+
+        // console.log(sample);
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+        <div class="sample">
+            <input type="text" v-on:input="name = $event.target.value" v-on:change="onChange" v-bind:value="name">
+            <!-- Вместо v-on можно писать @click, @input ... -->
+            <!-- Вместо v-bind можно писать просто :value -->
+            <!-- Директива v-bind  -->
+            <!-- $event - обьект который ссылается на нативное событие браузера -->
+            <!-- События работают в контектсе Vue тоесть this.value не сработает , в обычном js  в контексте DOM -->
+            <button class="btn btn-success" @click="showName=!showName">Togglename</button>
+            <button class="btn btn-success" @click="toggleName">Togglename2</button>
+            <hr>
+
+            <!-- v-show скрывает эдемент через display:none  -->
+            <h2 v-show="showName">Hello,{{name}}</h2>
+            <!-- v-if удаляет элемент с DOM  -->
+            <h2 v-if="showName">Hello,{{name}}</h2>
+
+            <!-- Тег template удаляется браузером и не генерируется в DOM узел -->
+            <template v-else>
+                <div>Name is hidden</div>
+                <div>Name is hidden 2</div>
+            </template>
+
+        </div>
+    </div>
+
+
+    <script>
+        let sample = new Vue({
+            el: '.sample',
+            data: {
+                name: 'Default',
+                showName: true
+            },
+
+            methods: {
+                onChange(e) {
+                    // Пример как посмотреть событие в консоли
+                    console.log(this);
+                    console.log(e);
+                },
+
+                toggleName() {
+                    this.showName = !this.showName;
+                }
+                // Тоже что toggleName:function(){ }
+            },
+        });
+
+
+        // console.log(sample);
+
+    </script>
+
+
+</body>
+
+</html>
