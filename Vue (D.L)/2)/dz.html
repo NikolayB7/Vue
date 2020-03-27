@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+        <div class="sample">
+
+            <form>
+                <div class="form-group">
+                    <label for="example-1">Email address</label>
+                    <input type="email" class="form-control" id="example-1" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="example-2">First Name</label>
+                    <input type="text" class="form-control" id="example-2" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="example-3">Last Name</label>
+                    <input type="text" class="form-control" id="example-3" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="example-4">Phone</label>
+                    <input type="phone" class="form-control" id="example-4">
+                </div>
+
+                <div class="form-group">
+                    <label for="example-5">Guests</label>
+                        <button type="button" class="btn btn-primary">+</button>
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+
+
+
+        </div>
+    </div>
+
+    <script>
+
+
+
+        let sample = new Vue({
+            el: '.sample',
+            data: {
+
+            },
+
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

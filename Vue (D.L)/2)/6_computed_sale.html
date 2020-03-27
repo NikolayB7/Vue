@@ -29,33 +29,35 @@
             <h2>Hello,{{ fullName }}</h2>
 
             <hr>
-
-            <input type="text" v-model="promo">
+            <!-- .lazy - модификатор событий v-model начинает работать не на 
+                событии inpu а на событии change  -->
+            <input type="text" v-model.lazy="promo">
             <hr>
 
             <button class="btn btn-success" @click="showText = !showText">ToggleText</button>
 
             <hr>
 
-            <div v-model="showText">Your sale is {{sale}} %</div>
+            <h3 v-show="showText">Your sale is {{sale}} %</h3>
 
-            <div v-show="showText">Some text</div>
 
 
         </div>
     </div>
 
-
     <script>
 
-        function getSale(code) {
+        function getSale(code, callback) {
             let codes = {
                 newYear: 10,
                 some: 20
             };
 
             let sale = (codes[code] !== undefined) ? codes[code] : 0;
-            return sale;
+
+            setTimeout(() => {
+                callback(sale);
+            }, 500);
 
         }
 
@@ -66,25 +68,29 @@
                 lastName: '',
                 fullName: '',
                 promo: '',
-                showText: false
+                showText: true,
+                sale: 0
             },
+
+            /*computed - нельзя использовать при выполнии синхронных операций потому что значение необходимо получить прямо сейчас но оно еще не выполнео*/
+
             computed: {
                 fullName() {
                     console.log('render fullName');
 
                     return this.firstName + ' ' + this.lastName;
-                },
-                sale() {
-                    return getSale(this.promo);
                 }
+
             },
             watch: {
-
-            },
+                promo() {
+                    getSale(this.promo, (sale) => {
+                        this.sale = sale;
+                    });
+                }
+            }
         });
 
-
-        // console.log(sample);
 
     </script>
 
