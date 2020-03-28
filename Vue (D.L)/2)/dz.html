@@ -12,6 +12,18 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <style>
+        .field-control {
+            margin: 10px 0;
+        }
+
+        .error {
+            border: 1px solid red;
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -20,32 +32,70 @@
     <div class="wrapper">
         <div class="sample">
 
-            <form>
+            <form v-if="!formSubmited" @submit.prevent= 'formSubmited = true'>
                 <div class="form-group">
                     <label for="example-1">Email address</label>
-                    <input type="email" class="form-control" id="example-1" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="example-1" v-model="email">
                 </div>
                 <div class="form-group">
                     <label for="example-2">First Name</label>
-                    <input type="text" class="form-control" id="example-2" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" id="example-2" v-model="firstName">
                 </div>
                 <div class="form-group">
                     <label for="example-3">Last Name</label>
-                    <input type="text" class="form-control" id="example-3" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" id="example-3" v-model="lastName">
                 </div>
                 <div class="form-group">
                     <label for="example-4">Phone</label>
-                    <input type="phone" class="form-control" id="example-4">
+                    <input type="phone" class="form-control" id="example-4" v-model="phone">
                 </div>
 
                 <div class="form-group">
                     <label for="example-5">Guests</label>
-                        <button type="button" class="btn btn-primary">+</button>
+                    <button type="button" class="btn btn-primary" @click="addGuest">+</button>
+                </div>
+
+                <div class="form-group" v-for="(guest,index) in guests">
+                    <label for="example-6" @dblclick="deleteGuest(index)">Guests {{index +1}}</label>
+                    <input type="text" class="form-control" v-model="guests[index]">
                 </div>
 
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>
 
+
+            <div v-else>
+                <h2>All done</h2>
+                <table class="table tablr-bordered">
+                    <tr>
+                        <td>Email</td>
+                        <td>{{email}}</td>
+                    </tr>
+                    <tr>
+                        <td>First Name</td>
+                        <td>{{firstName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>{{lastName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td>{{phone}}</td>
+                    </tr>
+                    <tr>
+                        <td>Guest</td>
+                        <td>
+                            <ul>
+                                <li class="list-group-item" v-for="(guest,index) in guests">
+
+                                    {{guest}}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
 
         </div>
@@ -55,11 +105,26 @@
 
 
 
+
         let sample = new Vue({
             el: '.sample',
             data: {
-
+                formSubmited : false,
+                email: '',
+                firstName: '',
+                lastName: '',
+                phone: '',
+                guests: []
             },
+
+            methods: {
+                addGuest() {
+                    this.guests.push('');
+                },
+                deleteGuest(index){
+                    this.guests.splice(index,1);
+                }
+            }
 
 
         });
